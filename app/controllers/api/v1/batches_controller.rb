@@ -32,7 +32,7 @@ module Api
         @batch.destroy
       end
 
-          private
+      private
 
       def set_batch
         @batch = Batch.find(params[:id])
