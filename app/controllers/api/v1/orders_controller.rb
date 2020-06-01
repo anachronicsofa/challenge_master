@@ -10,12 +10,12 @@ module Api
       def create
         @order = Order.new(order_params)
         @order.status = 'ready'
-          if @order.save
-            render json: @order
-          else
-            render json: @order.errors, status: :unprocessable_entity
-          end
+        if @order.save
+          render json: @order
+        else
+          render json: @order.errors, status: :unprocessable_entity
         end
+      end
         
       def show
           @order = Order.find(params[:id])
