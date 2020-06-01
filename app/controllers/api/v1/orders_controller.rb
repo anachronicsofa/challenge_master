@@ -37,6 +37,7 @@ module Api
           render json: @orders.errors
         @orders = Order.where(purchase_channel: purchase_ch, status: 'closing')
         render json: @orders
+        end
       end
       
       def update
@@ -62,4 +63,4 @@ module Api
       end
     end
   end
-end 
+end

@@ -17,6 +17,26 @@ module Api
         end
       end
 
+      def add_order_to_a_batch(orders)
+        batch.n_orders = 0
+        orders.each do |order| 
+          if (order.purchase_channel==batch.purchase_channel && order.status=="ready")
+            batch.orders << order    
+            order.batch.id = @batch.id
+            order.status = 'production'
+            n_orders +=1
+          else
+            erros=[]
+            erros.push(order)
+          end
+        end
+        if erros.count != 0 
+          puts "ERROR! Cannot add this orders: #{erros}"
+        end
+      puts "Number of Orders: #{n_orders}"
+      render json: batch.orders
+    end
+
       def printing_done
         @batch.orders.status = 'closing'
       end
