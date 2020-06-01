@@ -18,7 +18,7 @@ module Api
       end
 
       def printing_done
-        @batch.orders.status = "closing"
+        @batch.orders.status = 'closing'
       end
 
       def delivery_order(delivery_service)
