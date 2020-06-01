@@ -13,3 +13,6 @@ json.array! @orders do |order|
         json.reference order.batch.reference
         end 
   end
+
+
+  

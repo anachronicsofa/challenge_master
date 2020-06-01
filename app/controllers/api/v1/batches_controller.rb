@@ -1,46 +1,41 @@
+require_relative "orders_controller.rb"
+
 module Api
   module V1
-    class BatchesController < ApplicationController
-      def index
-        @batches = Batch.order('created_at DESC')
-        render json: @batches
-      end
+    class BatchesController < ApplicationController 
 
-      def show
-        batches = Batch.find(params[:id])
-        render json: { status: 'SUCCESS', message: 'Loaded batch', data: batches }, status: :ok
+
+      def index
+        @batch = Batch.order('created_at DESC');
+        render json: @batch
       end
 
       def create
         @batch = Batch.new(batch_params)
         if @batch.save
-          render json: { status: 'SUCCESS', message: 'Saved batch', data: @batch }, status: :ok
-        else
-          render json: @batch.errors, status: :unprocessable_entity
-        end
-      end
-
-      def update
-        if @batch.update(batch_params)
           render json: @batch
         else
-          render json: @batch.errors, status: :unprocessable_entity
+          render json: @batch.errors
         end
       end
 
-      def destroy
-        @batch.destroy
+      def printing_done
+        @batch.orders.status = "closing"
+      end
+
+      def delivery_order(delivery_service)
+        @batch.orders.each do |order|
+          if order.delivery_service == delivery_service
+            order.status = 'sent'
+          end
+        end 
       end
 
       private
 
-      def set_batch
-        @batch = Batch.find(params[:id])
-      end
-
       def batch_params
-        params.require(:batch).permit(:reference, :purchase_channel)
+        params.permit(:reference, :purchase_channel)
       end
     end
-  end
+  end 
 end
