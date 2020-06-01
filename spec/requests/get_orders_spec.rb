@@ -9,6 +9,8 @@ RSpec.describe Order, type: :request do
                             total_value: '42', line_items: 'fsadaga'})
     expect(order.reference).to eq('test_reference')
     expect(order.purchase_channel).to eq('iguatemi')
+    expect(order.address).to eq('rua alguma coisa')
+    exepct(order.delivery_service).to eq('rappi')
     expect(order.total_value).to eq('42')
   end
 end

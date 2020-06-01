@@ -1,11 +1,9 @@
 require 'rails_helper'
-describe 'get all batch route', :type => :request do
-  let!(:batch)
-  before {get '/api/v1/batches'}
-  it 'returns all questions' do
-    expect(JSON.parse(response.body).size).to eq(5)
-  end
-  it 'returns status code 200' do
-    expect(response).to have_http_status(:success)
+
+RSpec.describe Batch, type: :request do
+  it 'create batch' do
+    batch = Batch.create!({ reference: 'test_reference', purchase_channel: 'iguatemi'})
+    expect(batch.reference).to eq('test_reference')
+    expect(batch.purchase_channel).to eq('iguatemi')
   end
 end
