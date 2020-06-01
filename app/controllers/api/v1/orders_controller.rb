@@ -9,8 +9,8 @@ module Api
 
       def create
         @order = Order.new(order_params)
+        @order.status = 'ready'
           if @order.save
-            @order.status = 'ready'
             render json: @order
           else
             render json: @order.errors, status: :unprocessable_entity
