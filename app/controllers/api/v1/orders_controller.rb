@@ -1,7 +1,7 @@
 module Api
   module V1
     class OrdersController < ApplicationController
-     
+
       def index
         @orders = Order.order('created_at DESC')
         render json: @orders
@@ -15,7 +15,7 @@ module Api
       def create
         @order = Order.new(order_params)
           if @order.save
-            render json: @order, status: :created, location: @order
+            render json: @order
           else
             render json: @order.errors, status: :unprocessable_entity
           end
@@ -40,7 +40,7 @@ module Api
       end
 
       def order_params
-          params.require(:order).permit(:reference, :client_name, :purchase_channel, :address, :delivery_service, :total_value, :line_items, :status, :batch_id)
+          params.require(:order).permit(:reference, :client_name, :purchase_channel, :address, :delivery_service, :total_value, :line_items)
       end
     end
   end

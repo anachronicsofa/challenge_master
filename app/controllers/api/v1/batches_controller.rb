@@ -3,8 +3,6 @@ require_relative "orders_controller.rb"
 module Api
   module V1
     class BatchesController < ApplicationController 
-
-
       def index
         @batch = Batch.order('created_at DESC');
         render json: @batch
@@ -28,7 +26,7 @@ module Api
           if order.delivery_service == delivery_service
             order.status = 'sent'
           end
-        end 
+        end
       end
 
       private
