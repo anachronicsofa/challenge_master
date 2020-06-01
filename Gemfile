@@ -11,11 +11,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
-
-
+gem 'rspec-rails', '~> 3.6'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'capybara'
   gem 'rspec-rails', '~> 3.6'
 end
 
