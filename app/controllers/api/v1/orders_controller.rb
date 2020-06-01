@@ -17,7 +17,7 @@ module Api
           end
         end
         
-      def show_by_id
+      def show
           @order = Order.find(params[:id])
           render json: @order
       end
