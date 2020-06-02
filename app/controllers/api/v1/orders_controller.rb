@@ -16,40 +16,40 @@ module Api
           render json: @order.errors, status: :unprocessable_entity
         end
       end
-        
+
       def show
-          @order = Order.find(params[:id])
-          render json: @order
+        @order = Order.find(params[:id])
+        render json: @order
       end
 
       def show_status_by_name(name)
-          if name.blank?
-            render json: @orders.errors
+          #if name.blank?
+          # render json: @orders.errors
           #TODO - includes a check if client_name exists
           # name.instance_variable_defined?(:client_name)
           @orders = Order.where(client_name: name)
           render json: @orders
-          end
+          #end
       end
 
       def show_closing_order_by_purchase_ch(purchase_ch)
         if purchase_ch.blank?
           render json: @orders.errors
+        end
         @orders = Order.where(purchase_channel: purchase_ch, status: 'closing')
         render json: @orders
-        end
       end
-      
+
       def update
         if @order.update(order_params)
-              render json: @order
+          render json: @order
         else
-              render json: @order.errors, status: :unprocessable_entity
+          render json: @order.errors, status: :unprocessable_entity
         end
       end
 
       def destroy
-          @order.destroy
+        @order.destroy
       end
 
       private

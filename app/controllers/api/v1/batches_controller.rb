@@ -17,7 +17,7 @@ module Api
         end
       end
 
-      def add_order_to_a_batch(orders)
+      def add_order(orders)
         batch.n_orders = 0
         orders.each do |order| 
           if (order.purchase_channel==batch.purchase_channel && order.status=="ready")
