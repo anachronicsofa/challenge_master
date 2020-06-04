@@ -24,7 +24,7 @@ module Api
       end
 
       def printing_done
-        @batch.orders.status = 'closing'
+        @batch.orders.update_all(status: 'closing')
       end
 
       def deliver_order
@@ -55,14 +55,14 @@ module Api
         orders.each do |order|
           if order.purchase_channel == @batch.purchase_channel && order.status == 'ready'
             @batch.orders << order
-            order.batch.id = @batch.id
-            order.status = 'production'
+            order.batch_id = @batch.id
           else
             erros.push(order)
           end
         end
+        @batch.orders.update_all(status: 'production')
         if erros.count != 0
-          render json: { status: 'success', message: "#{@batch.orders.count} orders added to the batch. #{@batch.orders}./n ERROR: #{erros} can't be add (differente purchase channel." }
+          render json: { status: 'success', message: "#{@batch.reference} was created. #{@batch.orders.count} orders added to the batch. | Att: Can't be add #{erros.count} order(s) (differente purchase channel): #{erros}" }
         else
           render json: { status: 'success', message: "#{@batch.orders.count} orders added to the batch. #{@batch.orders}" }
         end
