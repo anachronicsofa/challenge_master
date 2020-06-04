@@ -6,5 +6,5 @@ class Order < ApplicationRecord
   validates :delivery_service, presence: true
   validates :total_value, presence: true
   validates :line_items, presence: true
-  belongs_to :batch, optional:true
+  belongs_to :batch, optional: true
 end

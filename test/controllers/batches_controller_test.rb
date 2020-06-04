@@ -5,32 +5,31 @@ class BatchesControllerTest < ActionDispatch::IntegrationTest
     @batch = batches(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get batches_url, as: :json
     assert_response :success
   end
 
-  test "should create batch" do
+  test 'should create batch' do
     assert_difference('Batch.count') do
-      post batches_url, params: { batch: { purchase_channel: @batch.purchase_channel, reference: @batch.reference } }, as: :json
+      post api_v1_batches_path, params: { batch: { purchase_channel: @batch.purchase_channel, reference: @batch.reference } }, as: :json
     end
-
     assert_response 201
   end
 
-  test "should show batch" do
-    get batch_url(@batch), as: :json
+  test 'should show batch' do
+    get api_v1_batch_path(@batch.id), as: :json
     assert_response :success
   end
 
-  test "should update batch" do
-    patch batch_url(@batch), params: { batch: { purchase_channel: @batch.purchase_channel, reference: @batch.reference } }, as: :json
+  test 'should update batch' do
+    patch api_v1_batches_path(@batch), params: { batch: { purchase_channel: @batch.purchase_channel, reference: @batch.reference } }, as: :json
     assert_response 200
   end
 
-  test "should destroy batch" do
+  test 'should destroy batch' do
     assert_difference('Batch.count', -1) do
-      delete batch_url(@batch), as: :json
+      delete api_v1_batches_path(@batch), as: :json
     end
 
     assert_response 204
