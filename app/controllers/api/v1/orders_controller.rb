@@ -32,11 +32,12 @@ module Api
       end
 
       def show_closing_order_by_purchase_ch
-        if params[:purchase_ch].blank?
+        if params[:purchase_channel].blank?
           render json: { error: 'Empty purchase channel' }, status: 404
         else
-          @orders = Order.where('client_name like ?', "%#{params[:purchase_channel]}%", status: :closing)
-          render json: @orders
+          @orders = Order.where('purchase_channel like ?', "%#{params[:purchase_channel]}%")
+          @orders_final = @orders.where('status like ?', "%#{params[:status]}%")
+          render json: @orders_final
         end
       end
 
