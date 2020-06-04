@@ -60,7 +60,8 @@ module Api
       end
 
       def order_params
-        params.require(:order).permit(:reference, :client_name, :purchase_channel, :address, :delivery_service, :total_value, :line_items)
+        params.require(:order).permit(:reference, :client_name, :purchase_channel,
+                                      :address, :delivery_service, :total_value, :line_items)
       end
     end
   end
