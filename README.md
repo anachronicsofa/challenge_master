@@ -45,6 +45,6 @@ https://documenter.getpostman.com/view/11570035/SztHX5Ut?version=latest
 * Use <i>.downcase</i> in the parameters for comparison to avoid string recognition problem.
 * Implement more test cases to check the application of the status change methods.
 
-<h2>Obs:</h2>
+
 *The test were made at postman, but there's some specs to run for check create. 
 
