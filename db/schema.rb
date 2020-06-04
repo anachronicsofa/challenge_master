@@ -23,5 +23,5 @@ ActiveRecord::Schema.define(version: 2020_05_30_024903) do
     t.index ['batch_id'], name: 'index_orders_on_batch_id'
   end
 
-  add_foreign_key "orders", "batches"
+  add_foreign_key 'orders', 'batches'
 end
