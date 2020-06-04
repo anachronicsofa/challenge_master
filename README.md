@@ -44,6 +44,7 @@ https://documenter.getpostman.com/view/11570035/SztHX5Ut?version=latest
 * Add other combinations of parameters for research, and check if parameters used in research exist in the database.
 * Use <i>.downcase</i> in the parameters for comparison to avoid string recognition problem.
 * Implement more test cases to check the application of the status change methods.
+* Show all orders for a batch in the batch index (show).
 
 
 *The test were made at postman, but there's some specs to run for check create. 
