@@ -37,10 +37,11 @@ $ rails routes
 
 <h2>Features/Endpoints documentation (via Postman):</h2>
 
-
+https://documenter.getpostman.com/view/11570035/SztHX5Ut?version=latest
 
 <h2>To-do:</h2>
 
 * Add other combinations of parameters for research, and check if parameters used in research exist in the database.
 * Use <i>.downcase</i> in the parameters for comparison to avoid string recognition problem.
 * Implement more test cases to check the application of the status change methods.
+
