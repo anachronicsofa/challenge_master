@@ -1,7 +1,7 @@
 module Api
   module V1
     class OrdersController < ApplicationController
-
+      before_action :set_order, only: %i[show update destroy]
       def index
         @orders = Order.order('created_at DESC')
         render json: @orders
@@ -22,22 +22,22 @@ module Api
         render json: @order
       end
 
-      def show_status_by_name(name)
-          #if name.blank?
-          # render json: @orders.errors
-          #TODO - includes a check if client_name exists
-          # name.instance_variable_defined?(:client_name)
-          @orders = Order.where(client_name: name)
+      def show_status_by_name
+        if params[:client_name].blank?
+          render json: { error: 'Empty client name' }, status: 404
+        else
+          @orders = Order.where('client_name like ?', "%#{params[:client_name]}%")
           render json: @orders
-          #end
+        end
       end
 
-      def show_closing_order_by_purchase_ch(purchase_ch)
-        if purchase_ch.blank?
-          render json: @orders.errors
+      def show_closing_order_by_purchase_ch
+        if params[:purchase_ch].blank?
+          render json: { error: 'Empty purchase channel' }, status: 404
+        else
+          @orders = Order.where('client_name like ?', "%#{params[:purchase_channel]}%", status: :closing)
+          render json: @orders
         end
-        @orders = Order.where(purchase_channel: purchase_ch, status: 'closing')
-        render json: @orders
       end
 
       def update
@@ -55,11 +55,11 @@ module Api
       private
 
       def set_order
-          @order = Order.find(params[:id])
+        @order = Order.find(params[:id])
       end
 
       def order_params
-          params.require(:order).permit(:reference, :client_name, :purchase_channel, :address, :delivery_service, :total_value, :line_items)
+        params.require(:order).permit(:reference, :client_name, :purchase_channel, :address, :delivery_service, :total_value, :line_items)
       end
     end
   end
