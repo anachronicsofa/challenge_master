@@ -1,24 +1,46 @@
-# README
+# Gocase Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ An apiREST that create a platform to receive Purchase Orders from other systems, group them on Batches and follow the Orders in the production pipeline until the dispatch.
 
-Things you may want to cover:
+Other systems may control when an Order or a Batch is ready to move to the next stage using a few endpoints to signal progress on the production pipeline.
 
-* Ruby version
+<h2>Technologies:</h2>
 
-* System dependencies
+* Ruby version: 2.5.5
 
-* Configuration
+* Rails version: 5.2.4.3
 
-* Database creation
+* Database: postgresql 
 
-* Database initialization
+<h2>Infos:</h2>
 
-* How to run the test suite
+* Clone the repository:
+```
+$ git clone https://github.com/anachronicsofa/challenge_master
+```
+* Install all gems: 
+```
+$ bundle install
+```
+* Update the database and feed the database with default seeds:
+```
+$ rake db:create db:migrate db:seed
+```
+* Start the web server on http://localhost:3000 by default:
+```
+$ rails s
+```
+* All routes: http://localhost:3000/rails/info/routes or 
+```
+$ rails routes
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+<h2>Features/Endpoints documentation (via Postman):</h2>
 
-* Deployment instructions
 
-* ...
+
+<h2>To-do:</h2>
+
+* Add other combinations of parameters for research, and check if parameters used in research exist in the database.
+* Use <i>.downcase</i> in the parameters for comparison to avoid string recognition problem.
+* Implement more test cases to check the application of the status change methods.
