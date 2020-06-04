@@ -29,11 +29,11 @@ module Api
 
       def deliver_order
         if params[:delivery_service].blank?
-          render json: { error: 'Empty delivery_service' }, status: 404
+          render json: { error: 'No orders with this delivery service' }, status: 404
         else
           @batch.orders.each do |order|
             if order.delivery_service == params[:delivery_service]
-              order.status = 'sent'
+              order.update(status: 'sent')
             end
           end
         end
